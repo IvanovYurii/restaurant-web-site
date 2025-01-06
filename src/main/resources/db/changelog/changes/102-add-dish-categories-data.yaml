@@ -1,0 +1,34 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-dish-categories-data
+      author: Ivanov Yurii
+      changes:
+        - insert:
+            tableName: dish_categories
+            columns:
+              - column:
+                  name: name
+                  value: 'Italian'
+              - column:
+                  name: description
+                  value: 'Traditional Italian cuisine, including pasta, pizza, and more.'
+
+        - insert:
+            tableName: dish_categories
+            columns:
+              - column:
+                  name: name
+                  value: 'Vegetarian'
+              - column:
+                  name: description
+                  value: 'Dishes that are entirely plant-based, without meat or fish.'
+
+        - insert:
+            tableName: dish_categories
+            columns:
+              - column:
+                  name: name
+                  value: 'Grilled'
+              - column:
+                  name: description
+                  value: 'Dishes that are grilled to perfection over an open flame.'

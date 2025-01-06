@@ -1,4 +1,4 @@
-package ivanov.springbootintro.dto.dishcategory;
+package ivanov.springbootintro.dto.drinkcategory;
 
-public record DishCategoryDto(Long id, String name, String description) {
+public record DrinkCategoryDto(Long id, String name, String description) {
 }

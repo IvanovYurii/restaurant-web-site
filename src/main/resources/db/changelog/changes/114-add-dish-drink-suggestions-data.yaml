@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-dish-drink-suggestions-data
+      author: Ivanov Yurii
+      changes:
+        - insert:
+            tableName: dish_drink_suggestions
+            columns:
+              - column:
+                  name: dish_id
+                  value: '6'  # Замість цього використовуйте правильний dish_id з вашої таблиці dishes
+              - column:
+                  name: drink_id
+                  value: '2'  # Замість цього використовуйте правильний drink_id з вашої таблиці drinks
+
+        - insert:
+            tableName: dish_drink_suggestions
+            columns:
+              - column:
+                  name: dish_id
+                  value: '7'  # Замість цього використовуйте правильний dish_id
+              - column:
+                  name: drink_id
+                  value: '3'  # Замість цього використовуйте правильний drink_id
+
+        - insert:
+            tableName: dish_drink_suggestions
+            columns:
+              - column:
+                  name: dish_id
+                  value: '8' # Замість цього використовуйте правильний dish_id
+              - column:
+                  name: drink_id
+                  value: '1'  # Замість цього використовуйте правильний drink_id
+
+        - insert:
+            tableName: dish_drink_suggestions
+            columns:
+              - column:
+                  name: dish_id
+                  value: '8'  # Замість цього використовуйте правильний dish_id
+              - column:
+                  name: drink_id
+                  value: '2'  # Замість цього використовуйте правильний drink_id

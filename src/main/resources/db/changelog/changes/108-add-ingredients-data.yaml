@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-ingredients-data
+      author: Ivanov Yurii
+      changes:
+        - insert:
+            tableName: ingredients
+            columns:
+              - column:
+                  name: name
+                  value: "Tomato"
+        - insert:
+            tableName: ingredients
+            columns:
+              - column:
+                  name: name
+                  value: "Cucumber"
+        - insert:
+            tableName: ingredients
+            columns:
+              - column:
+                  name: name
+                  value: "Lettuce"
+        - insert:
+            tableName: ingredients
+            columns:
+              - column:
+                  name: name
+                  value: "Onion"
+        - insert:
+            tableName: ingredients
+            columns:
+              - column:
+                  name: name
+                  value: "Garlic"

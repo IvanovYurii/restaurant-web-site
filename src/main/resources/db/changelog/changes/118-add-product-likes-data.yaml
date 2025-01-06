@@ -1,0 +1,34 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-product-likes-data
+      author: Ivanov Yurii
+      changes:
+        - insert:
+            tableName: product_likes
+            columns:
+              - column: { name: product_id, value: '1' }  # Spaghetti Bolognese
+              - column: { name: liked_by_users_id, value: '1' }  # john_doe
+
+        - insert:
+            tableName: product_likes
+            columns:
+              - column: { name: product_id, value: '1' }  # Spaghetti Bolognese
+              - column: { name: liked_by_users_id, value: '2' }  # jane_smith
+
+        - insert:
+            tableName: product_likes
+            columns:
+              - column: { name: product_id, value: '2' }  # Caesar Salad
+              - column: { name: liked_by_users_id, value: '1' }  # john_doe
+
+        - insert:
+            tableName: product_likes
+            columns:
+              - column: { name: product_id, value: '3' }  # Grilled Chicken Breast
+              - column: { name: liked_by_users_id, value: '3' }  # mark_jones
+
+        - insert:
+            tableName: product_likes
+            columns:
+              - column: { name: product_id, value: '3' }  # Grilled Chicken Breast
+              - column: { name: liked_by_users_id, value: '2' }  # jane_smith

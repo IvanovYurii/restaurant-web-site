@@ -1,0 +1,32 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-shoppingCarts-table
+      author: Ivanov Yurii
+      changes:
+        - createTable:
+            tableName: shopping_carts
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: bigint
+              - column:
+                  name: total_cost
+                  type: double
+              - column:
+                  name: is_deleted
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+        # Додавання значення за замовчуванням через SQL
+        - sql:
+            sql: |
+              ALTER TABLE shopping_carts
+              ALTER COLUMN total_cost SET DEFAULT 0;

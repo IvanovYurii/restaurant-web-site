@@ -1,0 +1,24 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-table-product-likes
+      author: Ivanov Yurii
+      changes:
+        - createTable:
+            tableName: product_likes
+            columns:
+              - column:
+                  name: liked_by_users_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_products_likes_users
+                    references: users(id)
+                    nullable: false
+                    deleteCascade: true
+              - column:
+                  name: product_id
+                  type: bigint
+                  constraints:
+                    foreignKeyName: fk_products_likes_products
+                    references: products(id)
+                    nullable: false
+                    deleteCascade: true

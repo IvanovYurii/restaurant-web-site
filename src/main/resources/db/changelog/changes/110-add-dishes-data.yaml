@@ -1,0 +1,28 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-dishes-data
+      author: Ivanov Yurii
+      changes:
+        - insert:
+            tableName: dishes
+            columns:
+              - column: { name: id, value: '6' }
+              - column: { name: category_id, value: '2' }  # Category ID for Pizza
+              - column: { name: weight, value: '500' }  # Weight for Pizza
+              - column: { name: preparation_time, value: '15' }  # Preparation time for Pizza
+
+        - insert:
+            tableName: dishes
+            columns:
+              - column: { name: id, value: '7' }
+              - column: { name: category_id, value: '1' }  # Category ID for Spaghetti
+              - column: { name: weight, value: '350' }  # Weight for Spaghetti
+              - column: { name: preparation_time, value: '20' }  # Preparation time for Spaghetti
+
+        - insert:
+            tableName: dishes
+            columns:
+              - column: { name: id, value: '8' }
+              - column: { name: category_id, value: '3' }  # Category ID for Salad
+              - column: { name: weight, value: '250' }  # Weight for Salad
+              - column: { name: preparation_time, value: '10' }  # Preparation time for Salad
