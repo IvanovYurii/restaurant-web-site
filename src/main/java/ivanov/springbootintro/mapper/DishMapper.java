@@ -5,6 +5,7 @@ import ivanov.springbootintro.dto.dish.CreateDishRequestDto;
 import ivanov.springbootintro.dto.dish.DishDto;
 import ivanov.springbootintro.dto.dish.DishDtoWithDishNamesLikesCount;
 import ivanov.springbootintro.dto.dish.DishDtoWithDishNamesUsersLikes;
+import ivanov.springbootintro.dto.drink.DrinkDto;
 import ivanov.springbootintro.model.Dish;
 import ivanov.springbootintro.model.Drink;
 import ivanov.springbootintro.model.Ingredient;
@@ -76,17 +77,17 @@ public interface DishMapper {
         return ingredientNames;
     }
 
-    @AfterMapping
+   /* @AfterMapping
     default void mapSuggestedDrinks(Dish dish, @MappingTarget DishDtoWithDishNamesLikesCount dto) {
-        Set<String> suggestedDrinks = mapSuggestedDrinksToName(dish.getSuggestedDrinks());
+        Set<DrinkDto> suggestedDrinks = mapSuggestedDrinksToName(dish.getSuggestedDrinks());
         dto.setSuggestedDrinks(suggestedDrinks);
-    }
+    }*/
 
-    @AfterMapping
+    /*@AfterMapping
     default void mapSuggestedDrinks(Dish dish, @MappingTarget DishDtoWithDishNamesUsersLikes dto) {
         Set<String> ingredients = mapSuggestedDrinksToName(dish.getSuggestedDrinks());
         dto.setSuggestedDrinks(ingredients);
-    }
+    }*/
 
     default Set<String> mapSuggestedDrinksToName(Set<Drink> drinks) {
         Set<String> suggestedDrinksNames = new HashSet<>();

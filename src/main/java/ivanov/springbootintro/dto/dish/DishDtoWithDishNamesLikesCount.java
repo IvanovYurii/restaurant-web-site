@@ -1,5 +1,6 @@
 package ivanov.springbootintro.dto.dish;
 
+import ivanov.springbootintro.dto.drink.DrinkDto;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -22,7 +23,7 @@ public class DishDtoWithDishNamesLikesCount {
     private String imageUrl;
     private Integer preparationTime;
     private Integer countLikes;
-    private Set<String> suggestedDrinks = new HashSet<>();
+    private Set<DrinkDto> suggestedDrinks = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {

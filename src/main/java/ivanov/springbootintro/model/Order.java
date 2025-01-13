@@ -48,9 +48,6 @@ public class Order {
     @Column(name = "order_date", nullable = false)
     private LocalDateTime orderDate;
 
-    @Column(name = "shipping_address", nullable = false)
-    private String shippingAddress;
-
     @OneToMany(mappedBy = "order", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private Set<OrderItem> orderItems = new HashSet<>();
 

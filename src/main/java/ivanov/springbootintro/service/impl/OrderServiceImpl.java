@@ -96,7 +96,6 @@ public class OrderServiceImpl implements OrderService {
         Order order = new Order();
         order.setUser(user);
         order.setOrderDate(LocalDateTime.now());
-        order.setShippingAddress(requestDto.shippingAddress());
         order.setStatus(Order.Status.PENDING);
         Set<OrderItem> orderItems = createOrderItems(order, shoppingCart.getCartItems());
         BigDecimal total = calculateTotal(orderItems);
@@ -113,7 +112,6 @@ public class OrderServiceImpl implements OrderService {
 
     private OrderItem createOrderItemFromCartItem(Order order, CartItem cartItem) {
         OrderItem orderItem = new OrderItem();
-
         return orderItem;
     }
 
