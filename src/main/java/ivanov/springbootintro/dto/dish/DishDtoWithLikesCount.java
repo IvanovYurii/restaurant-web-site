@@ -1,4 +1,4 @@
-package ivanov.springbootintro.dto.drink;
+package ivanov.springbootintro.dto.dish;
 
 import java.util.Objects;
 import lombok.Data;
@@ -6,7 +6,7 @@ import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true)
-public class DrinkDtoWithCategoryNameLikesCount extends DrinkDto {
+public class DishDtoWithLikesCount extends DishDto {
     private Integer countLikes;
 
     @Override
@@ -20,12 +20,12 @@ public class DrinkDtoWithCategoryNameLikesCount extends DrinkDto {
         if (!super.equals(o)) {
             return false;
         }
-        DrinkDtoWithCategoryNameLikesCount that = (DrinkDtoWithCategoryNameLikesCount) o;
+        DishDtoWithLikesCount that = (DishDtoWithLikesCount) o;
         return Objects.equals(countLikes, that.countLikes);
     }
 
     @Override
     public int hashCode() {
-        return 31 * super.hashCode() + (countLikes != null ? countLikes.hashCode() : 0);
+        return 31 * super.hashCode() + Objects.hash(countLikes);
     }
 }

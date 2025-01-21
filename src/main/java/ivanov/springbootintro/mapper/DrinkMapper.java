@@ -5,6 +5,7 @@ import ivanov.springbootintro.dto.drink.CreateDrinkRequestDto;
 import ivanov.springbootintro.dto.drink.DrinkDto;
 import ivanov.springbootintro.dto.drink.DrinkDtoWithCategoryNameLikesCount;
 import ivanov.springbootintro.dto.drink.DrinkDtoWithCategoryNameListUserLikes;
+import ivanov.springbootintro.dto.user.UserResponseDto;
 import ivanov.springbootintro.model.Drink;
 import ivanov.springbootintro.model.User;
 import java.util.HashSet;
@@ -21,41 +22,41 @@ public interface DrinkMapper {
     @Mapping(source = "category", target = "drinkCategory")
     DrinkDto toDto(Drink drink);
 
-    @Mapping(source = "category.name", target = "categoryName")
+    @Mapping(source = "category", target = "drinkCategory")
     DrinkDtoWithCategoryNameLikesCount toDtoWithCategoryNameCounterLikes(Drink drink);
 
-    @Mapping(source = "category.name", target = "categoryName")
+    @Mapping(source = "category", target = "drinkCategory")
     DrinkDtoWithCategoryNameListUserLikes toDtoWithCategoryNameListUserLikes(Drink drink);
 
     Drink toEntity(CreateDrinkRequestDto requestDto);
 
     // Метод для підрахунку лайків тільки для DrinkDtoWithCategoryNameCounterLikes
     @AfterMapping
-    default void mapLikeCount(
-            Drink drink, @MappingTarget DrinkDtoWithCategoryNameLikesCount dto) {
-        // Підраховуємо кількість лайків
-        Integer likeCount = drink.getLikedByUsers().size();
-
-        // Встановлюємо кількість лайків у DTO
+    default void mapLikeCount(Drink drink, @MappingTarget DrinkDtoWithCategoryNameLikesCount dto) {
+        Integer likeCount = (drink.getLikedByUsers() != null) ? drink.getLikedByUsers().size() : 0;
         dto.setCountLikes(likeCount);
     }
 
-    // Метод для маппінгу користувачів на їхні імена (для DrinkDtoWithCategoryNameListUserLikes)
+    // Метод для маппінгу користувачів на їхні DTO (для DrinkDtoWithCategoryNameListUserLikes)
     @AfterMapping
-    default void mapLikedByUsers(
-            Drink drink, @MappingTarget DrinkDtoWithCategoryNameListUserLikes dto) {
-        Set<String> userNames = mapUsersToNames(drink.getLikedByUsers());
-        dto.setLikedByUsers(userNames);
+    default void mapLikedByUsers(Drink drink,
+                                 @MappingTarget DrinkDtoWithCategoryNameListUserLikes dto) {
+        Set<UserResponseDto> userDtos = mapUsersToUserDtos(drink.getLikedByUsers());
+        dto.setLikedByUsers(userDtos);
     }
 
-    // Метод для маппінгу користувачів на їхні імена
-    default Set<String> mapUsersToNames(Set<User> users) {
-        Set<String> userNames = new HashSet<>();
-        for (User user : users) {
-            userNames.add(user.getFirstName()
-                    + " "
-                    + user.getLastName());
+    // Метод для маппінгу користувачів на їхні DTO (UserResponseDto)
+    default Set<UserResponseDto> mapUsersToUserDtos(Set<User> users) {
+        Set<UserResponseDto> userDtos = new HashSet<>();
+        if (users != null) {
+            for (User user : users) {
+                // Перетворюємо кожного користувача в UserResponseDto
+                UserResponseDto userResponseDto = new UserResponseDto(user.getId(),
+                        user.getEmail(), user.getFirstName(), user.getLastName(),
+                        user.getAvatarUrl(), user.getRoles());
+                userDtos.add(userResponseDto);
+            }
         }
-        return userNames;
+        return userDtos;
     }
 }

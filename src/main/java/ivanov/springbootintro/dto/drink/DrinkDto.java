@@ -1,10 +1,8 @@
 package ivanov.springbootintro.dto.drink;
 
 import ivanov.springbootintro.dto.drinkcategory.DrinkCategoryDto;
-import ivanov.springbootintro.model.User;
 import java.math.BigDecimal;
 import java.util.Objects;
-import java.util.Set;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -16,12 +14,11 @@ public class DrinkDto {
     private BigDecimal price;
     private String description;
     private Integer volume;
-    private DrinkCategoryDto drinkCategory;
     private Boolean available;
     private Double alcoholPercentage;
     private Integer calories;
-    private Set<User> likedByUsers;
     private String imageUrl;
+    private DrinkCategoryDto drinkCategory;
 
     @Override
     public boolean equals(Object o) {

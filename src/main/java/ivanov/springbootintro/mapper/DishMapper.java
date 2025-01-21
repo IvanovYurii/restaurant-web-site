@@ -3,9 +3,11 @@ package ivanov.springbootintro.mapper;
 import ivanov.springbootintro.config.MapperConfig;
 import ivanov.springbootintro.dto.dish.CreateDishRequestDto;
 import ivanov.springbootintro.dto.dish.DishDto;
-import ivanov.springbootintro.dto.dish.DishDtoWithDishNamesLikesCount;
-import ivanov.springbootintro.dto.dish.DishDtoWithDishNamesUsersLikes;
-import ivanov.springbootintro.dto.drink.DrinkDto;
+import ivanov.springbootintro.dto.dish.DishDtoWithLikesCount;
+import ivanov.springbootintro.dto.dish.DishDtoWithUsersLikes;
+import ivanov.springbootintro.dto.drink.DrinkDtoWithCategoryNameLikesCount;
+import ivanov.springbootintro.dto.ingredient.IngredientDto;
+import ivanov.springbootintro.dto.user.UserResponseDto;
 import ivanov.springbootintro.model.Dish;
 import ivanov.springbootintro.model.Drink;
 import ivanov.springbootintro.model.Ingredient;
@@ -18,82 +20,99 @@ import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 
 @Mapper(config = MapperConfig.class,
-        uses = {DishMapper.class, Ingredient.class, UserMapper.class})
+        uses = {DrinkMapper.class,
+                IngredientMapper.class,
+                UserMapper.class})
 public interface DishMapper {
 
+    // Основне перетворення Dish -> DishDto
     @Mapping(source = "category", target = "dishCategory")
     DishDto toDto(Dish dish);
 
+    // Перетворення Dish -> DishDtoWithLikesCount з підрахунком лайків
+    @Mapping(source = "category", target = "dishCategory")
+    DishDtoWithLikesCount toDishDtoWithLikesCount(Dish dish);
+
+    // Перетворення Dish -> DishDtoWithUsersLikes з користувачами, які лайкнули
+    @Mapping(source = "category", target = "dishCategory")
+    DishDtoWithUsersLikes toDishDtoWithUsersLikes(Dish dish);
+
+    // Перетворення CreateDishRequestDto -> Dish
     Dish toEntity(CreateDishRequestDto requestDto);
 
-    @Mapping(source = "category.name", target = "categoryName")
-    DishDtoWithDishNamesLikesCount toDishDtoWithDishNamesCountLikes(Dish dish);
-
-    @Mapping(source = "category.name", target = "categoryName")
-    DishDtoWithDishNamesUsersLikes toDishDtoWithDishNamesUsersLikes(Dish dish);
-
-    // Метод для підрахунку лайків тільки для DishDtoWithDishNamesLikesCount
+    // Підрахунок лайків для DishDtoWithLikesCount
     @AfterMapping
-    default void mapLikeCount(Dish dish, @MappingTarget DishDtoWithDishNamesLikesCount dto) {
-        // Підраховуємо кількість лайків
-        Integer likeCount = dish.getLikedByUsers().size();
-        // Встановлюємо кількість лайків у DTO
-        dto.setCountLikes(likeCount);
+    default void mapLikeCount(Dish dish, @MappingTarget DishDtoWithLikesCount dto) {
+        dto.setCountLikes(dish.getLikedByUsers().size());
     }
 
-    // Метод для маппінгу користувачів на їхні імена (для DrinkDtoWithCategoryNameListUserLikes)
+    // Підрахунок користувачів, які лайкнули для DishDtoWithUsersLikes
     @AfterMapping
-    default void mapLikedByUsers(Dish dish, @MappingTarget DishDtoWithDishNamesUsersLikes dto) {
-        Set<String> userNames = mapUsersToNames(dish.getLikedByUsers());
-        dto.setLikedByUsers(userNames);
+    default void mapLikedByUsers(Dish dish,
+                                 @MappingTarget DishDtoWithUsersLikes dto,
+                                 UserMapper userMapper) {
+        dto.setLikedByUsers(mapUsersToDto(dish.getLikedByUsers(), userMapper));
     }
 
-    // Метод для маппінгу користувачів на їхні імена
-    default Set<String> mapUsersToNames(Set<User> users) {
-        Set<String> userNames = new HashSet<>();
-        for (User user : users) {
-            userNames.add(user.getFirstName() + " " + user.getLastName());
-        }
-        return userNames;
+    // Мапінг інгредієнтів на відповідні DTO
+    @AfterMapping
+    default void mapIngredients(Dish dish, @MappingTarget DishDtoWithLikesCount dto,
+                                IngredientMapper ingredientMapper) {
+        dto.setIngredients(mapIngredientsToDto(dish.getIngredients(), ingredientMapper));
     }
 
     @AfterMapping
-    default void mapIngredients(Dish dish, @MappingTarget DishDtoWithDishNamesLikesCount dto) {
-        Set<String> ingredients = mapIngredientsToName(dish.getIngredients());
-        dto.setIngredients(ingredients);
+    default void mapIngredients(Dish dish, @MappingTarget DishDtoWithUsersLikes dto,
+                                IngredientMapper ingredientMapper) {
+        dto.setIngredients(mapIngredientsToDto(dish.getIngredients(), ingredientMapper));
     }
 
-    @AfterMapping
-    default void mapIngredients(Dish dish, @MappingTarget DishDtoWithDishNamesUsersLikes dto) {
-        Set<String> ingredients = mapIngredientsToName(dish.getIngredients());
-        dto.setIngredients(ingredients);
-    }
-
-    default Set<String> mapIngredientsToName(Set<Ingredient> ingredients) {
-        Set<String> ingredientNames = new HashSet<>();
+    // Допоміжний метод для перетворення інгредієнтів у IngredientDto
+    default Set<IngredientDto> mapIngredientsToDto(Set<Ingredient> ingredients,
+                                                   IngredientMapper ingredientMapper) {
+        Set<IngredientDto> ingredientDtos = new HashSet<>();
         for (Ingredient ingredient : ingredients) {
-            ingredientNames.add(ingredient.getName());
+            ingredientDtos.add(ingredientMapper.toDto(ingredient));
         }
-        return ingredientNames;
+        return ingredientDtos;
     }
 
-   /* @AfterMapping
-    default void mapSuggestedDrinks(Dish dish, @MappingTarget DishDtoWithDishNamesLikesCount dto) {
-        Set<DrinkDto> suggestedDrinks = mapSuggestedDrinksToName(dish.getSuggestedDrinks());
-        dto.setSuggestedDrinks(suggestedDrinks);
-    }*/
-
-    /*@AfterMapping
-    default void mapSuggestedDrinks(Dish dish, @MappingTarget DishDtoWithDishNamesUsersLikes dto) {
-        Set<String> ingredients = mapSuggestedDrinksToName(dish.getSuggestedDrinks());
-        dto.setSuggestedDrinks(ingredients);
-    }*/
-
-    default Set<String> mapSuggestedDrinksToName(Set<Drink> drinks) {
-        Set<String> suggestedDrinksNames = new HashSet<>();
-        for (Drink drink : drinks) {
-            suggestedDrinksNames.add(drink.getName());
+    // Допоміжний метод для перетворення користувачів у UserResponseDto
+    default Set<UserResponseDto> mapUsersToDto(Set<User> users, UserMapper userMapper) {
+        Set<UserResponseDto> userDtos = new HashSet<>();
+        for (User user : users) {
+            userDtos.add(userMapper.toDto(user));
         }
-        return suggestedDrinksNames;
+        return userDtos;
+    }
+
+    // Мапінг рекомендованих напоїв для DishDtoWithLikesCount
+    @AfterMapping
+    default void mapSuggestedDrinks(Dish dish,
+                                    @MappingTarget DishDtoWithLikesCount dto,
+                                    DrinkMapper drinkMapper) {
+        Set<DrinkDtoWithCategoryNameLikesCount> suggestedDrinks = mapSuggestedDrinksToDto(
+                dish.getSuggestedDrinks(), drinkMapper);
+        dto.setSuggestedDrinks(suggestedDrinks);
+    }
+
+    // Мапінг рекомендованих напоїв для DishDtoWithUsersLikes
+    @AfterMapping
+    default void mapSuggestedDrinks(Dish dish,
+                                    @MappingTarget DishDtoWithUsersLikes dto,
+                                    DrinkMapper drinkMapper) {
+        Set<DrinkDtoWithCategoryNameLikesCount> suggestedDrinks =
+                mapSuggestedDrinksToDto(dish.getSuggestedDrinks(), drinkMapper);
+        dto.setSuggestedDrinks(suggestedDrinks);
+    }
+
+    // Метод для перетворення рекомендованих напоїв у DTO
+    default Set<DrinkDtoWithCategoryNameLikesCount> mapSuggestedDrinksToDto(
+            Set<Drink> drinks, DrinkMapper drinkMapper) {
+        Set<DrinkDtoWithCategoryNameLikesCount> suggestedDrinksDtos = new HashSet<>();
+        for (Drink drink : drinks) {
+            suggestedDrinksDtos.add(drinkMapper.toDtoWithCategoryNameCounterLikes(drink));
+        }
+        return suggestedDrinksDtos;
     }
 }

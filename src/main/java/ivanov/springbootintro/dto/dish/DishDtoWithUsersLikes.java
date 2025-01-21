@@ -1,6 +1,7 @@
-package ivanov.springbootintro.dto.drink;
+package ivanov.springbootintro.dto.dish;
 
 import ivanov.springbootintro.dto.user.UserResponseDto;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import lombok.Data;
@@ -8,8 +9,8 @@ import lombok.experimental.Accessors;
 
 @Data
 @Accessors(chain = true)
-public class DrinkDtoWithCategoryNameListUserLikes extends DrinkDto {
-    private Set<UserResponseDto> likedByUsers;
+public class DishDtoWithUsersLikes extends DishDto {
+    private Set<UserResponseDto> likedByUsers = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {
@@ -22,12 +23,12 @@ public class DrinkDtoWithCategoryNameListUserLikes extends DrinkDto {
         if (!super.equals(o)) {
             return false;
         }
-        DrinkDtoWithCategoryNameListUserLikes that = (DrinkDtoWithCategoryNameListUserLikes) o;
+        DishDtoWithUsersLikes that = (DishDtoWithUsersLikes) o;
         return Objects.equals(likedByUsers, that.likedByUsers);
     }
 
     @Override
     public int hashCode() {
-        return 31 * super.hashCode() + (likedByUsers != null ? likedByUsers.hashCode() : 0);
+        return 31 * super.hashCode() + Objects.hash(likedByUsers);
     }
 }

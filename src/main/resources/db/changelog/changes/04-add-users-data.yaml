@@ -10,6 +10,7 @@ databaseChangeLog:
               - column: { name: password, value: 'password123' }
               - column: { name: first_name, value: 'John' }
               - column: { name: last_name, value: 'Doe' }
+              - column: { name: avatar_url, value: 'images/users/standard_logo.jpg' }
 
         - insert:
             tableName: users
@@ -18,6 +19,7 @@ databaseChangeLog:
               - column: { name: password, value: 'securepass' }
               - column: { name: first_name, value: 'Jane' }
               - column: { name: last_name, value: 'Smith' }
+              - column: { name: avatar_url, value: 'images/users/standard_logo.jpg' }
 
         - insert:
             tableName: users
@@ -26,6 +28,7 @@ databaseChangeLog:
               - column: { name: password, value: 'bobspassword' }
               - column: { name: first_name, value: 'Bob' }
               - column: { name: last_name, value: 'Jones' }
+              - column: { name: avatar_url, value: 'images/users/standard_logo.jpg' }
 
         - insert:
             tableName: users
@@ -34,3 +37,4 @@ databaseChangeLog:
               - column: { name: password, value: 'password_jack' }
               - column: { name: first_name, value: 'Jack' }
               - column: { name: last_name, value: 'Jackson' }
+              - column: { name: avatar_url, value: 'images/users/standard_logo.jpg' }

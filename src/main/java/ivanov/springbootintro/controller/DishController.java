@@ -3,8 +3,8 @@ package ivanov.springbootintro.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import ivanov.springbootintro.dto.dish.CreateDishRequestDto;
-import ivanov.springbootintro.dto.dish.DishDtoWithDishNamesLikesCount;
-import ivanov.springbootintro.dto.dish.DishDtoWithDishNamesUsersLikes;
+import ivanov.springbootintro.dto.dish.DishDtoWithLikesCount;
+import ivanov.springbootintro.dto.dish.DishDtoWithUsersLikes;
 import ivanov.springbootintro.service.DishService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
@@ -45,7 +45,7 @@ public class DishController {
                     + "You can use the 'page' and 'size' query parameters to paginate through the"
                     + " results."
     )
-    public List<DishDtoWithDishNamesLikesCount> getAllDishes(
+    public List<DishDtoWithLikesCount> getAllDishes(
             @ParameterObject Pageable pageable
     ) {
         return dishService.getAll(pageable);
@@ -58,7 +58,7 @@ public class DishController {
                     + "This endpoint is accessible to authenticated users and returns information"
                     + " such as dishID, name and description"
     )
-    public DishDtoWithDishNamesUsersLikes getDishById(
+    public DishDtoWithUsersLikes getDishById(
             @PathVariable @Min(1) Long id
     ) {
         return dishService.getById(id);
@@ -72,7 +72,7 @@ public class DishController {
                     + "including name and description. "
                     + "This operation requires the user to have the role ADMIN."
     )
-    public DishDtoWithDishNamesLikesCount createDish(
+    public DishDtoWithLikesCount createDish(
             @RequestBody @Valid CreateDishRequestDto requestDto
     ) {
         return dishService.create(requestDto);
@@ -84,7 +84,7 @@ public class DishController {
             description = "This endpoint update information about a specific dish by its ID. "
                     + "This operation requires the user to have the role ADMIN."
     )
-    public DishDtoWithDishNamesUsersLikes updateDish(
+    public DishDtoWithUsersLikes updateDish(
             @PathVariable @Min(1) Long id,
             @RequestBody @Valid CreateDishRequestDto requestDto
     ) {
@@ -113,7 +113,7 @@ public class DishController {
                     + "You can use the 'page' and 'size' query parameters to paginate through the"
                     + " results."
     )
-    public List<DishDtoWithDishNamesLikesCount> getDishesByDishDishId(
+    public List<DishDtoWithLikesCount> getDishesByDishDishId(
             @PathVariable @Min(1) Long id,
             @ParameterObject Pageable pageable
     ) {

@@ -43,6 +43,7 @@ public class UserServiceImpl implements UserService {
         user.setRoles(Set.of(roleRepository.getByName(Role.RoleName.ROLE_USER)
                 .orElseThrow(() -> new EntityNotFoundException("Can't find role  "
                         + Role.RoleName.ROLE_USER))));
+        user.setAvatarUrl("images/users/standard_logo.jpg");
         userRepository.save(user);
         registerNewShoppingCart(user);
         return userMapper.toDto(user);

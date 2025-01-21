@@ -1,25 +1,25 @@
 package ivanov.springbootintro.service;
 
 import ivanov.springbootintro.dto.dish.CreateDishRequestDto;
-import ivanov.springbootintro.dto.dish.DishDtoWithDishNamesLikesCount;
-import ivanov.springbootintro.dto.dish.DishDtoWithDishNamesUsersLikes;
+import ivanov.springbootintro.dto.dish.DishDtoWithLikesCount;
+import ivanov.springbootintro.dto.dish.DishDtoWithUsersLikes;
 import java.util.List;
 import org.springframework.data.domain.Pageable;
 
 public interface DishService {
-    DishDtoWithDishNamesLikesCount create(
+    DishDtoWithLikesCount create(
             CreateDishRequestDto requestDto);
 
-    List<DishDtoWithDishNamesLikesCount> getAll(
+    List<DishDtoWithLikesCount> getAll(
             Pageable pageable);
 
-    DishDtoWithDishNamesUsersLikes getById(Long id);
+    DishDtoWithUsersLikes getById(Long id);
 
-    DishDtoWithDishNamesUsersLikes updateById(
+    DishDtoWithUsersLikes updateById(
             CreateDishRequestDto requestDto, Long id);
 
     void deleteById(Long id);
 
-    List<DishDtoWithDishNamesLikesCount> getDishesByDishCategoryId(
+    List<DishDtoWithLikesCount> getDishesByDishCategoryId(
             Long id, Pageable pageable);
 }

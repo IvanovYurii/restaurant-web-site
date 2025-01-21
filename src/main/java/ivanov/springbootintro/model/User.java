@@ -37,6 +37,8 @@ public class User implements UserDetails {
     @Column(nullable = false)
     private String lastName;
     @Column(nullable = false)
+    private String avatarUrl;
+    @Column(nullable = false)
     private Boolean isDeleted = false;
     @ManyToMany
     @Fetch(value = FetchMode.JOIN)

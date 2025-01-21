@@ -1,8 +1,8 @@
 package ivanov.springbootintro.service.impl;
 
 import ivanov.springbootintro.dto.dish.CreateDishRequestDto;
-import ivanov.springbootintro.dto.dish.DishDtoWithDishNamesLikesCount;
-import ivanov.springbootintro.dto.dish.DishDtoWithDishNamesUsersLikes;
+import ivanov.springbootintro.dto.dish.DishDtoWithLikesCount;
+import ivanov.springbootintro.dto.dish.DishDtoWithUsersLikes;
 import ivanov.springbootintro.exception.EntityNotFoundException;
 import ivanov.springbootintro.mapper.DishMapper;
 import ivanov.springbootintro.model.Dish;
@@ -33,31 +33,31 @@ public class DishServiceImpl implements DishService {
     private final IngredientRepository ingredientRepository;
 
     @Override
-    public DishDtoWithDishNamesLikesCount create(
+    public DishDtoWithLikesCount create(
             CreateDishRequestDto requestDto) {
         Dish dish = dishMapper.toEntity(requestDto);
         dish.setCategory(validateCategoryIdsExistence(requestDto.categoryId()));
         updateDishRelations(dish, requestDto);
-        return dishMapper.toDishDtoWithDishNamesCountLikes(dishRepository.save(dish));
+        return dishMapper.toDishDtoWithLikesCount(dishRepository.save(dish));
     }
 
     @Override
-    public List<DishDtoWithDishNamesLikesCount> getAll(
+    public List<DishDtoWithLikesCount> getAll(
             Pageable pageable) {
         return dishRepository.findAll(pageable)
                 .stream()
-                .map(dishMapper::toDishDtoWithDishNamesCountLikes)
+                .map(dishMapper::toDishDtoWithLikesCount)
                 .toList();
     }
 
     @Override
-    public DishDtoWithDishNamesUsersLikes getById(Long id) {
+    public DishDtoWithUsersLikes getById(Long id) {
         Dish dish = assertDishExistsById(id);
-        return dishMapper.toDishDtoWithDishNamesUsersLikes(dish);
+        return dishMapper.toDishDtoWithUsersLikes(dish);
     }
 
     @Override
-    public DishDtoWithDishNamesUsersLikes updateById(
+    public DishDtoWithUsersLikes updateById(
             CreateDishRequestDto requestDto, Long id) {
         Dish dish = assertDishExistsById(id);
 
@@ -99,7 +99,7 @@ public class DishServiceImpl implements DishService {
 
         updateDishRelations(dish, requestDto);
 
-        return dishMapper.toDishDtoWithDishNamesUsersLikes(dishRepository.save(dish));
+        return dishMapper.toDishDtoWithUsersLikes(dishRepository.save(dish));
     }
 
     @Override
@@ -109,10 +109,10 @@ public class DishServiceImpl implements DishService {
     }
 
     @Override
-    public List<DishDtoWithDishNamesLikesCount> getDishesByDishCategoryId(
+    public List<DishDtoWithLikesCount> getDishesByDishCategoryId(
             Long id, Pageable pageable) {
         return dishRepository.findDishByCategory_Id(id).stream()
-                .map(dishMapper::toDishDtoWithDishNamesCountLikes)
+                .map(dishMapper::toDishDtoWithLikesCount)
                 .toList();
     }
 
