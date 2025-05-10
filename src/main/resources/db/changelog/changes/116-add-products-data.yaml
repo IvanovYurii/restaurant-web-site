@@ -1,0 +1,180 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-products-data
+      author: Ivanov Yurii
+      changes:
+        - insert:
+            tableName: products
+            columns:
+              - column:
+                  name: name
+                  value: 'Coca-Cola'
+              - column:
+                  name: price
+                  value: '2.50'
+              - column:
+                  name: description
+                  value: 'A refreshing soda drink.'
+              - column:
+                  name: calories
+                  value: '150'
+              - column:
+                  name: available
+                  value: '1'
+              - column:
+                  name: image_url
+                  value: '/images/coca-cola.jpg'
+
+        - insert:
+            tableName: products
+            columns:
+              - column:
+                  name: name
+                  value: 'Water'
+              - column:
+                  name: price
+                  value: '1.50'
+              - column:
+                  name: description
+                  value: 'A refreshing bottle of water.'
+              - column:
+                  name: calories
+                  value: '0'
+              - column:
+                  name: available
+                  value: '1'
+              - column:
+                  name: image_url
+                  value: '/images/water.jpg'
+
+        - insert:
+            tableName: products
+            columns:
+              - column:
+                  name: name
+                  value: 'Orange Juice'
+              - column:
+                  name: price
+                  value: '3.50'
+              - column:
+                  name: description
+                  value: 'Freshly squeezed orange juice.'
+              - column:
+                  name: calories
+                  value: '80'
+              - column:
+                  name: available
+                  value: '1'
+              - column:
+                  name: image_url
+                  value: '/images/orange-juice.jpg'
+
+        - insert:
+            tableName: products
+            columns:
+              - column:
+                  name: name
+                  value: 'Lemonade'
+              - column:
+                  name: price
+                  value: '4.00'
+              - column:
+                  name: description
+                  value: 'A sweet and sour lemonade.'
+              - column:
+                  name: calories
+                  value: '120'
+              - column:
+                  name: available
+                  value: '1'
+              - column:
+                  name: image_url
+                  value: '/images/lemonade.jpg'
+
+        - insert:
+            tableName: products
+            columns:
+              - column:
+                  name: name
+                  value: 'Apple Juice'
+              - column:
+                  name: price
+                  value: '3.00'
+              - column:
+                  name: description
+                  value: 'Freshly pressed apple juice.'
+              - column:
+                  name: calories
+                  value: '100'
+              - column:
+                  name: available
+                  value: '1'
+              - column:
+                  name: image_url
+                  value: '/images/apple-juice.jpg'
+
+        - insert:
+            tableName: products
+            columns:
+              - column:
+                  name: name
+                  value: 'Pizza Margherita'
+              - column:
+                  name: price
+                  value: '8.99'
+              - column:
+                  name: description
+                  value: 'A classic Italian pizza with fresh tomatoes, mozzarella cheese, and basil.'
+              - column:
+                  name: calories
+                  value: '250'
+              - column:
+                  name: available
+                  value: '1'
+              - column:
+                  name: image_url
+                  value: '/images/pizza-margherita.jpg'
+
+        - insert:
+            tableName: products
+            columns:
+              - column:
+                  name: name
+                  value: 'Spaghetti Carbonara'
+              - column:
+                  name: price
+                  value: '12.50'
+              - column:
+                  name: description
+                  value: 'A rich pasta dish with eggs, cheese, pancetta, and pepper.'
+              - column:
+                  name: calories
+                  value: '450'
+              - column:
+                  name: available
+                  value: '1'
+              - column:
+                  name: image_url
+                  value: '/images/spaghetti-carbonara.jpg'
+
+        - insert:
+            tableName: products
+            columns:
+              - column:
+                  name: name
+                  value: 'Caesar Salad'
+              - column:
+                  name: price
+                  value: '6.99'
+              - column:
+                  name: description
+                  value: 'Crisp romaine lettuce, croutons, parmesan cheese, and Caesar dressing.'
+              - column:
+                  name: calories
+                  value: '200'
+              - column:
+                  name: available
+                  value: '1'
+              - column:
+                  name: image_url
+                  value: '/images/caesar-salad.jpg'

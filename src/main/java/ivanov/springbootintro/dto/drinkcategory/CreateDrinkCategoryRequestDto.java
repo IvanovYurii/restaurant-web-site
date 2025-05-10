@@ -1,8 +1,8 @@
-package ivanov.springbootintro.dto.dishcategory;
+package ivanov.springbootintro.dto.drinkcategory;
 
 import jakarta.validation.constraints.NotEmpty;
 
-public record CreateDishCategoryRequestDto(
+public record CreateDrinkCategoryRequestDto(
         @NotEmpty String name,
         String description) {
 }

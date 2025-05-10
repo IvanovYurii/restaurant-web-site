@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-drinks-table
+      author: Ivanov Yurii
+      changes:
+        - createTable:
+            tableName: drinks
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+              - column:
+                  name: volume
+                  type: integer
+                  constraints:
+                    nullable: true
+              - column:
+                  name: alcohol_percentage
+                  type: float
+                  constraints:
+                    nullable: true
+              - column:
+                  name: category_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+
+        # Додавання зовнішнього ключа
+        - addForeignKeyConstraint:
+            baseTableName: drinks
+            baseColumnNames: category_id
+            constraintName: fk_drinks_category  # Назва зовнішнього ключа
+            referencedTableName: drink_categories  # Таблиця, на яку посилається FK
+            referencedColumnNames: id  # Колонка в таблиці drink_categories, на яку посилається FK
+            deferrable: false
+            initiallyDeferred: false

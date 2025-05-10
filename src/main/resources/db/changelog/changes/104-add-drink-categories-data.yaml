@@ -1,0 +1,34 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-drink-categories-data
+      author: Ivanov Yurii
+      changes:
+        - insert:
+            tableName: drink_categories
+            columns:
+              - column:
+                  name: name
+                  value: 'Alcoholic'
+              - column:
+                  name: description
+                  value: 'Drinks that contain alcohol, such as beer, wine, and spirits.'
+
+        - insert:
+            tableName: drink_categories
+            columns:
+              - column:
+                  name: name
+                  value: 'Non-Alcoholic'
+              - column:
+                  name: description
+                  value: 'Drinks that do not contain alcohol, such as juices, water, and sodas.'
+
+        - insert:
+            tableName: drink_categories
+            columns:
+              - column:
+                  name: name
+                  value: 'Soft Drinks'
+              - column:
+                  name: description
+                  value: 'Carbonated beverages, often sweetened and flavored.'

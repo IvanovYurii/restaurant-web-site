@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-dish-drink-suggestions-table
+      author: Ivanov Yurii
+      changes:
+        - createTable:
+            tableName: dish_drink_suggestions
+            columns:
+              - column:
+                  name: dish_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: drink_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+
+        # Зовнішній ключ для dish_id
+        - addForeignKeyConstraint:
+            baseTableName: dish_drink_suggestions
+            baseColumnNames: dish_id
+            constraintName: fk_dish_drink_suggestions_dish_id
+            referencedTableName: products
+            referencedColumnNames: id
+            onDelete: CASCADE
+
+        # Зовнішній ключ для drink_id
+        - addForeignKeyConstraint:
+            baseTableName: dish_drink_suggestions
+            baseColumnNames: drink_id
+            constraintName: fk_dish_drink_suggestions_drink_id
+            referencedTableName: products
+            referencedColumnNames: id
+            onDelete: CASCADE

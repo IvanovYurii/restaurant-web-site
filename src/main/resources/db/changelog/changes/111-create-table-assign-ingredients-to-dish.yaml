@@ -1,0 +1,38 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-dish-ingredients-table
+      author: Ivanov Yurii
+      changes:
+        - createTable:
+            tableName: dish_ingredients
+            columns:
+              - column:
+                  name: dish_id  # Залишаємо назву колонки dish_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ingredient_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+
+        - addPrimaryKey:
+            tableName: dish_ingredients
+            columnNames: dish_id, ingredient_id
+
+        - addForeignKeyConstraint:
+            baseTableName: dish_ingredients
+            baseColumnNames: dish_id
+            constraintName: fk_dish_ingredients_dish_id
+            referencedTableName: products
+            referencedColumnNames: id
+            onDelete: CASCADE
+
+        - addForeignKeyConstraint:
+            baseTableName: dish_ingredients
+            baseColumnNames: ingredient_id
+            constraintName: fk_dish_ingredients_ingredient_id
+            referencedTableName: ingredients
+            referencedColumnNames: id
+            onDelete: CASCADE

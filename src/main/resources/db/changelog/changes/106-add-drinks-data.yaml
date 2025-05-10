@@ -1,0 +1,44 @@
+databaseChangeLog:
+  - changeSet:
+      id: add-drinks-data
+      author: Ivanov Yurii
+      changes:
+        - insert:
+            tableName: drinks
+            columns:
+              - column: { name: id, value: '1' }
+              - column: { name: volume, value: '500' }
+              - column: { name: alcohol_percentage, value: '0' }
+              - column: { name: category_id, value: '2' }  # Assuming the category id for Soft Drinks
+
+        - insert:
+            tableName: drinks
+            columns:
+              - column: { name: id, value: '2' }
+              - column: { name: volume, value: '500' }
+              - column: { name: alcohol_percentage, value: '0' }
+              - column: { name: category_id, value: '2' }  # Assuming the category id for Soft Drinks
+
+        - insert:
+            tableName: drinks
+            columns:
+              - column: { name: id, value: '3' }
+              - column: { name: volume, value: '750' }
+              - column: { name: alcohol_percentage, value: '13.5' }
+              - column: { name: category_id, value: '1' }  # Assuming the category id for Alcoholic drinks
+
+        - insert:
+            tableName: drinks
+            columns:
+              - column: { name: id, value: '4' }
+              - column: { name: volume, value: '500' }
+              - column: { name: alcohol_percentage, value: '0' }
+              - column: { name: category_id, value: '3' }  # Assuming the category id for Juices
+
+        - insert:
+            tableName: drinks
+            columns:
+              - column: { name: id, value: '5' }
+              - column: { name: volume, value: '500' }
+              - column: { name: alcohol_percentage, value: '0' }
+              - column: { name: category_id, value: '3' }  # Assuming the category id for Juices

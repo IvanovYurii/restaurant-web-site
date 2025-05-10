@@ -1,0 +1,45 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-products-table
+      author: Ivanov Yurii
+      changes:
+        - createTable:
+            tableName: products
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: price
+                  type: double
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: varchar(255)
+              - column:
+                  name: calories
+                  type: int
+              - column:
+                  name: available
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: image_url
+                  type: varchar(255)
+
+        # Додавання значення за замовчуванням через SQL
+        - sql:
+            sql: |
+              ALTER TABLE products
+              ALTER COLUMN available SET DEFAULT True;

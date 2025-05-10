@@ -1,0 +1,36 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-dishes-table
+      author: Ivanov Yurii
+      changes:
+        - createTable:
+            tableName: dishes
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+              - column:
+                  name: category_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: weight
+                  type: integer
+                  constraints:
+                    nullable: true
+              - column:
+                  name: preparation_time
+                  type: integer
+                  constraints:
+                    nullable: true
+
+        # Створення зовнішнього ключа для категорії
+        - addForeignKeyConstraint:
+            baseTableName: dishes
+            baseColumnNames: category_id
+            constraintName: fk_dishes_category
+            referencedTableName: dish_categories
+            referencedColumnNames: id
+            deferrable: false
+            initiallyDeferred: false

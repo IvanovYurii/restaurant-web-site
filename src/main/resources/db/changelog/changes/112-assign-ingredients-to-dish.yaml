@@ -1,0 +1,64 @@
+databaseChangeLog:
+  - changeSet:
+      id: assign-ingredients-to-dish
+      author: Ivanov Yurii
+      changes:
+        - insert:
+            tableName: dish_ingredients
+            columns:
+              - column:
+                  name: dish_id
+                  value: '6'  # id страви
+              - column:
+                  name: ingredient_id
+                  value: '1'  # id інгредієнта
+
+        - insert:
+            tableName: dish_ingredients
+            columns:
+              - column:
+                  name: dish_id
+                  value: '6'  # id страви
+              - column:
+                  name: ingredient_id
+                  value: '2'  # id інгредієнта
+
+        - insert:
+            tableName: dish_ingredients
+            columns:
+              - column:
+                  name: dish_id
+                  value: '7'  # id страви
+              - column:
+                  name: ingredient_id
+                  value: '3'  # id інгредієнта
+
+        - insert:
+            tableName: dish_ingredients
+            columns:
+              - column:
+                  name: dish_id
+                  value: '7'  # id страви
+              - column:
+                  name: ingredient_id
+                  value: '4'  # id інгредієнта
+
+        - insert:
+            tableName: dish_ingredients
+            columns:
+              - column:
+                  name: dish_id
+                  value: '8'  # id страви
+              - column:
+                  name: ingredient_id
+                  value: '5'  # id інгредієнта
+
+        - insert:
+            tableName: dish_ingredients
+            columns:
+              - column:
+                  name: dish_id
+                  value: '8'  # id страви
+              - column:
+                  name: ingredient_id
+                  value: '2'  # id інгредієнта
